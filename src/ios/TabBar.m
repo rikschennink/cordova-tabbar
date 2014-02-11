@@ -56,17 +56,18 @@
 	[self.webView.superview addSubview:tabBar];
 }
 
-- (void)addTab:(NSString *)name withTitle:(NSString *)title andIcon:(NSString*)icon {
+- (void)addTab:(uint)tag withTitle:(NSString *)title andIcon:(NSString*)icon {
     
     NSString *filePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"www/%@@2x",icon] ofType:@"png"];
     UIImage *img = [UIImage imageWithContentsOfFile:filePath];
     
     
     UITabBarItem *tabItem = [UITabBarItem new];
+    [tabItem setTag:tag];
     [tabItem setTitle:title];
     [tabItem setImage:img];
+
     [tabs addObject:tabItem];
-    
     
     [tabBar setItems:tabs];
     
@@ -74,15 +75,20 @@
 
 - (void)addTab:(CDVInvokedUrlCommand *)command {
     
-    NSString *name = [command.arguments objectAtIndex:0];
+    uint tag = [[command.arguments objectAtIndex:0] intValue];
     NSString *title = [command.arguments objectAtIndex:1];
     NSString *icon = [command.arguments objectAtIndex:2];
     
-    [self addTab:name withTitle:title andIcon:icon];
+    [self addTab:tag withTitle:title andIcon:icon];
     
 }
 
-
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
+{
+    
+    NSLog(@"tab selected: %i %@", item.tag, item.title);
+    
+}
 
 
 @end

@@ -19,7 +19,7 @@
 
 - (void)setup:(CDVInvokedUrlCommand *)command;
 
-- (void)addTab:(NSString *)name withTitle:(NSString *)title andIcon:(NSString*)icon;
+- (void)addTab:(uint)tag withTitle:(NSString *)title andIcon:(NSString*)icon;
 
 - (void)addTab:(CDVInvokedUrlCommand *)command;
 

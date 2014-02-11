@@ -4,13 +4,19 @@
 
     var exports = {},method;
 
+    var uid = 0;
+    var tabTags = [];
+
     var plugin = {
         name:'TabBar',
         api:{
             'setup':null,
             'addTab':function(id,title,icon,onclick) {
+
+                tabTags[id] = uid++;
+                
                 return {
-                    params:[id,title,icon],
+                    params:[tabTags[id],title,icon],
                     success:onclick || null,
                     failure:null
                 };
