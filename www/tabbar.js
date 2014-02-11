@@ -7,17 +7,13 @@
     var plugin = {
         name:'TabBar',
         api:{
-            'setup':{
-                method:null,
-                success:null,
-                failure:null
-            },
-            'addTab':{
-                method:function(id,title,icon) {
-                    return [id,title,icon];
-                },
-                success:null,
-                failure:null
+            'setup':null,
+            'addTab':function(id,title,icon,onclick) {
+                return {
+                    params:[id,title,icon],
+                    success:onclick || null,
+                    failure:null
+                };
             }
         }
     };
@@ -26,18 +22,35 @@
 
         if (!plugin.api.hasOwnProperty(method)){continue;}
 
-        exports[method] = (function(method,props){
+        exports[method] = (function(name,setup){
 
             return function() {
+
+                var config = setup ? setup.apply(this,arguments) : {};
+
+                cordova.exec(
+                    config.success || null,
+                    config.failure || null,
+                    plugin.name,
+                    name,
+                    config.params || []
+                );
+
+            };
+
+            /*
+            return function() {
+
                 cordova.exec(
                     props.success,
                     props.failure,
                     plugin.name,
                     method,
-                    props.method ? props.method.apply(this,arguments) : []
+                    props.method ? props.method.apply(this,options) : []
                 );
-            };
 
+            };
+            */
 
         }(method,plugin.api[method]));
 
