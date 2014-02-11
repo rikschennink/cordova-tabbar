@@ -7,7 +7,7 @@
     var plugin = {
         name:'TabBar',
         api:{
-            'setupTabBar':{
+            'setup':{
                 params:[],
                 success:null,
                 failure:null
@@ -38,6 +38,6 @@
 
     // expose
     if (!window.plugins) {window.plugins = {};}
-    window.plugins[plugin.name] = exports;
+    window.plugins[plugin.name.charAt(0).toLowerCase()] = exports;
 
 }(window.cordova));

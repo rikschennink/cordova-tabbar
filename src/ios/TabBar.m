@@ -27,7 +27,7 @@
 }
 */
 
-- (void)setupTabBar:(CDVInvokedUrlCommand *)command {
+- (void)setup:(CDVInvokedUrlCommand *)command {
     
     UITabBar *tabBar = [UITabBar new];
     [tabBar sizeToFit];

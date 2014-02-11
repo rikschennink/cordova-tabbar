@@ -16,6 +16,6 @@
     
 }
 
-- (void)setupTabBar:(CDVInvokedUrlCommand *)command;
+- (void)setup:(CDVInvokedUrlCommand *)command;
 
 @end
