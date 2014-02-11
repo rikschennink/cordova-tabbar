@@ -8,7 +8,17 @@
         name:'TabBar',
         api:{
             'setup':{
-                params:[],
+                method:null,
+                success:null,
+                failure:null
+            },
+            'addTab':{
+                method:function(id,title,icon) {
+
+                    console.log(id,title,icon);
+
+                    return [id,title,icon];
+                },
                 success:null,
                 failure:null
             }
@@ -27,7 +37,7 @@
                     props.failure,
                     plugin.name,
                     method,
-                    props.params
+                    props.method ? props.method.apply(this,arguments) : []
                 );
             };
 
