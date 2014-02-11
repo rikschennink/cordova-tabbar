@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://cordova.apache.org/ns/plugins/1.0"
+        id="nl.rikschennink.cordova.tabbar"
+        version="0.0.1">
+
+    <name>TabBar</name>
+    <description>TabBar Plugin</description>
+    <license>Apache</license>
+    <keywords>cordova,tabbar,tabs,navigation,phonegap</keywords>
+
+    <js-module src="www/tabbar.js" name="tabbar">
+        <clobbers target="tabbar" />
+    </js-module>
+
+    <!-- ios -->
+    <platform name="ios">
+
+        <config-file target="config.xml" parent="/*">
+            <feature name="TabBar">
+                <param name="ios-package" value="TabBar"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/TabBar.h" />
+        <source-file src="src/ios/TabBar.m" />
+
+    </platform>
+
+</plugin>
