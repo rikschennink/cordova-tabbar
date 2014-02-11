@@ -54,13 +54,6 @@
 	self.webView.superview.autoresizesSubviews = YES;
     
 	[self.webView.superview addSubview:tabBar];
-    
-    /*
-    [self addTab:@"search" withTitle:@"Zoeken" andIcon:@"assets/ico-search"];
-    [self addTab:@"near" withTitle:@"Dichtbij" andIcon:@"assets/ico-near"];
-    [self addTab:@"add" withTitle:@"Toevoegen" andIcon:@"assets/ico-add"];
-    [self addTab:@"user" withTitle:@"Persoonlijk" andIcon:@"assets/ico-user"];
-    */
 }
 
 - (void)addTab:(NSString *)name withTitle:(NSString *)title andIcon:(NSString*)icon {

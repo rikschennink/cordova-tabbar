@@ -14,9 +14,6 @@
             },
             'addTab':{
                 method:function(id,title,icon) {
-
-                    console.log(id,title,icon);
-
                     return [id,title,icon];
                 },
                 success:null,
