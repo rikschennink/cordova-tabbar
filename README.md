@@ -1,4 +1,4 @@
-Cordova TabBar
+Cordova iOS TabBar
 ==============
 
 Native **iOS** TabBar for Cordova
