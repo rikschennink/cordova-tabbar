@@ -38,6 +38,6 @@
 
     // expose
     if (!window.plugins) {window.plugins = {};}
-    window.plugins[plugin.name.charAt(0).toLowerCase()] = exports;
+    window.plugins[plugin.name.charAt(0).toLowerCase() + plugin.name.slice(1)] = exports;
 
 }(window.cordova));
