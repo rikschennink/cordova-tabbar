@@ -18,6 +18,7 @@
     var plugin = {
         name:'TabBar',
         api:{
+            'reset':null,
             'setup':function(options) {
 
                 if (!options){options = {};}
