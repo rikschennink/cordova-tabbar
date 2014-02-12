@@ -131,4 +131,13 @@
 }
 
 
+- (void)selectTab:(CDVInvokedUrlCommand *)command {
+    
+    uint tag = [[command.arguments objectAtIndex:0] intValue];
+    
+    [tabBar setSelectedItem:[tabBar.items objectAtIndex:tag]];
+    
+}
+
+
 @end

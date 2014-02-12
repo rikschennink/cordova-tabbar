@@ -29,9 +29,7 @@
                 var tintSelected = getColorStringFromArray(options.tintSelected);
 
                 return {
-                    params:[tintDefault,tintSelected],
-                    success:null,
-                    failure:null
+                    params:[tintDefault,tintSelected]
                 }
             },
             'addTab':function(id,title,icon,ontap) {
@@ -40,9 +38,13 @@
 
                 return {
                     params:[tabTags[id],title,icon],
-                    success:ontap || null,
-                    failure:null
+                    success:ontap || null
                 };
+            },
+            'selectTab':function(id) {
+                return {
+                    params:[tabTags[id]]
+                }
             }
         }
     };

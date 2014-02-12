@@ -28,4 +28,6 @@
 
 - (void)addTab:(CDVInvokedUrlCommand *)command;
 
+- (void)selectTab:(CDVInvokedUrlCommand *)command;
+
 @end
