@@ -12,9 +12,11 @@
 
 @interface TabBar : CDVPlugin <UITabBarDelegate> {
     
+    int tags;
     UITabBar *tabBar;
     NSMutableArray *tabs;
     NSMutableDictionary *tabCallbacks;
+    NSMutableDictionary *tabTags;
     
 }
 
@@ -24,7 +26,7 @@
 
 - (void)setup:(CDVInvokedUrlCommand *)command;
 
-- (void)addTab:(uint)tag withTitle:(NSString *)title andIcon:(NSString*)icon;
+- (void)addTab:(int)tag withTitle:(NSString *)title andIcon:(NSString*)icon;
 
 - (void)addTab:(CDVInvokedUrlCommand *)command;
 

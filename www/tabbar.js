@@ -4,9 +4,6 @@
 
     var exports = {},method;
 
-    var uid = 0;
-    var tabTags = [];
-
     var getColorAsFloat = function(color){
         return color / 255.0;
     };
@@ -34,16 +31,15 @@
             },
             'addTab':function(id,title,icon,ontap) {
 
-                tabTags[id] = uid++;
-
                 return {
-                    params:[tabTags[id],title,icon],
+                    params:[id,title,icon],
                     success:ontap || null
                 };
+
             },
             'selectTab':function(id) {
                 return {
-                    params:[tabTags[id]]
+                    params:[id]
                 }
             }
         }

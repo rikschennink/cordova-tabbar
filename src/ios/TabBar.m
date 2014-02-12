@@ -17,8 +17,10 @@
     self = (TabBar*)[super initWithWebView:theWebView];
     if (self)
 	{
+        tags = 0;
         tabs = [[NSMutableArray alloc] initWithCapacity:4];
         tabCallbacks = [NSMutableDictionary new];
+        tabTags = [NSMutableDictionary new];
     }
     return self;
 }
@@ -89,7 +91,7 @@
 	[self.webView.superview addSubview:tabBar];
 }
 
-- (void)addTab:(uint)tag withTitle:(NSString *)title andIcon:(NSString*)icon {
+- (void)addTab:(int)tag withTitle:(NSString *)title andIcon:(NSString*)icon {
     
     NSString *filePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"www/%@@2x",icon] ofType:@"png"];
     UIImage *img = [UIImage imageWithContentsOfFile:filePath];
@@ -107,20 +109,33 @@
 
 - (void)addTab:(CDVInvokedUrlCommand *)command {
     
-    uint tag = [[command.arguments objectAtIndex:0] intValue];
+    NSString *tid = [command.arguments objectAtIndex:0];
     NSString *title = [command.arguments objectAtIndex:1];
     NSString *icon = [command.arguments objectAtIndex:2];
     
-    // add the tab
-    [self addTab:tag withTitle:title andIcon:icon];
+    // get tag by name
+    NSNumber *tagnr = [tabTags objectForKey:tid];
     
-    // store in hashtable
-    [tabCallbacks setObject:command.callbackId forKey:[NSNumber numberWithInt:tag]];
+    // if no tag found create a new tab
+    if (tagnr == nil) {
+        
+        // get new tag nr
+        int tag = tags++;
+        
+        // link tag to tab id
+        [tabTags setObject:tid forKey:[NSNumber numberWithInt:tag]];
+        
+        // add the tab
+        [self addTab:tag withTitle:title andIcon:icon];
+        
+        // store in hashtable
+        [tabCallbacks setObject:command.callbackId forKey:[NSNumber numberWithInt:tag]];
+
+    }
     
 }
 
-- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
-{
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
     
     // get callback from hashtable
     NSString *callbackId = [tabCallbacks objectForKey:[NSNumber numberWithInt:item.tag]];
@@ -133,8 +148,20 @@
 
 - (void)selectTab:(CDVInvokedUrlCommand *)command {
     
-    uint tag = [[command.arguments objectAtIndex:0] intValue];
+    NSString *tid = [command.arguments objectAtIndex:0];
     
+    // get tag by name
+    NSNumber *tagnr = [tabTags objectForKey:tid];
+    
+    // if no tag found stop here
+    if (tagnr == nil) {
+        return;
+    }
+    
+    // convert to int
+    int tag = [tagnr intValue];
+    
+    // set as selected
     [tabBar setSelectedItem:[tabBar.items objectAtIndex:tag]];
     
 }
