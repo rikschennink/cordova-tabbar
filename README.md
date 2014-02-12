@@ -9,7 +9,7 @@ Currently in development
 The following methods are exposed on `window.plugins.TabBar`.
 
 Setup TabBar
-```
+```javascript
 /*
 options: {
     tintDefault:[255,0,0,.5], // not implemented yet
@@ -20,7 +20,7 @@ setup(options)
 ```
 
 Add Tab to TabBar
-```
+```javascript
 /*
 id:         unique id
 title:      title to show beneath tab
@@ -31,12 +31,12 @@ addTab(id,title,icon,callback);
 ```
 
 Reset TabBar
-```
+```javascript
 reset()
 ```
 
 Select Tab
-```
+```javascript
 id: id of tab to set to selected state
 selectTab(id)
 ```
