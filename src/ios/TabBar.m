@@ -135,6 +135,12 @@
         [self addTab:tag withTitle:title andIcon:icon];
         
     }
+    else {
+        
+        // do update title
+        UITabBarItem *tabItem = [tabBar.items objectAtIndex:[tagnr intValue]];
+        tabItem.title = title;
+    }
     
     // store in hashtable
     [tabCallbacks setObject:command.callbackId forKey:tagnr];
