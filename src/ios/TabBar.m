@@ -32,23 +32,11 @@
                            alpha:[[parts objectAtIndex:3] doubleValue]];
 }
 
-
 - (void)setup:(CDVInvokedUrlCommand *)command {
     
     // get parameters
     NSString *jsTintColor = [command.arguments objectAtIndex:0];
     NSString *jsTintSelectedColor = [command.arguments objectAtIndex:1];
-    
-    if (jsTintColor != nil) {
-        UIColor *tintColor = [self stringAsUIColor:jsTintColor];
-    }
-    
-    if (jsTintSelectedColor != nil) {
-        UIColor *tintSelectedColor = [self stringAsUIColor:jsTintColor];
-        [tabBar setTintColor:tintSelectedColor];
-    }
-    
-    
     
     
     // setup tabbar
@@ -58,6 +46,20 @@
     tabBar.multipleTouchEnabled = NO;
     tabBar.userInteractionEnabled = YES;
 	tabBar.opaque = YES;
+
+    // apply colors
+    /*
+    currently tint color is not implemented
+    if (jsTintColor != (id)[NSNull null]) {
+        UIColor *tintColor = [self stringAsUIColor:jsTintColor];
+    }
+    */
+    
+    if (jsTintSelectedColor != (id)[NSNull null]) {
+        UIColor *tintSelectedColor = [self stringAsUIColor:jsTintSelectedColor];
+        [tabBar setTintColor:tintSelectedColor];
+    }
+    
     
     // setup bounds for tabbar
     float height = 49.0f;

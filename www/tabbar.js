@@ -12,10 +12,7 @@
     };
 
     var getColorStringFromArray = function(color) {
-        if (!color) {
-            return null;
-        }
-        return getColorAsFloat(color[0]) + ',' + getColorAsFloat(color[1]) + ',' + getColorAsFloat(color[2]) + ',' + (color[3] || 1.0);
+        return color ? getColorAsFloat(color[0]) + ',' + getColorAsFloat(color[1]) + ',' + getColorAsFloat(color[2]) + ',' + (color[3] || 1.0) : null;
     };
 
     var plugin = {
@@ -27,8 +24,6 @@
 
                 var tintDefault = getColorStringFromArray(options.tintDefault);
                 var tintSelected = getColorStringFromArray(options.tintSelected);
-
-                console.log(tintDefault,tintSelected);
 
                 return {
                     params:[tintDefault,tintSelected],
@@ -68,21 +63,6 @@
                 );
 
             };
-
-            /*
-            return function() {
-
-                cordova.exec(
-                    props.success,
-                    props.failure,
-                    plugin.name,
-                    method,
-                    props.method ? props.method.apply(this,options) : []
-                );
-
-            };
-            */
-
         }(method,plugin.api[method]));
 
     }
