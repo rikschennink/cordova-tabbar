@@ -8,28 +8,32 @@
     var tabTags = [];
 
     var getColorAsFloat = function(color){
-        return color / 255;
+        return color / 255.0;
     };
 
-    var getColorStringFromObject = function(color) {
+    var getColorStringFromArray = function(color) {
         if (!color) {
             return null;
         }
-        return getColorAsFloat(color.r) + ',' + getColorAsFloat(color.g) + ',' + getColorAsFloat(color.b) + ',' + color.a;
+        return getColorAsFloat(color[0]) + ',' + getColorAsFloat(color[1]) + ',' + getColorAsFloat(color[2]) + ',' + (color[3] || 1.0);
     };
 
     var plugin = {
         name:'TabBar',
         api:{
-            'setup':function(options){
+            'setup':function(options) {
 
                 if (!options){options = {};}
 
-                var tintDefault = getColorStringFromObject(options.tintDefault);
-                var tintSelected = getColorStringFromObject(options.tintSelected);
+                var tintDefault = getColorStringFromArray(options.tintDefault);
+                var tintSelected = getColorStringFromArray(options.tintSelected);
+
+                console.log(tintDefault,tintSelected);
 
                 return {
-                    params:[tintDefault,tintSelected]
+                    params:[tintDefault,tintSelected],
+                    success:null,
+                    failure:null
                 }
             },
             'addTab':function(id,title,icon,ontap) {

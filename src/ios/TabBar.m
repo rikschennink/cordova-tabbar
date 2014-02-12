@@ -23,8 +23,35 @@
     return self;
 }
 
+
+- (UIColor *)stringAsUIColor:(NSString*)colorString {
+    NSArray *parts = [colorString componentsSeparatedByString:@","];
+    return [UIColor colorWithRed:[[parts objectAtIndex:0] doubleValue]
+                           green:[[parts objectAtIndex:1] doubleValue]
+                            blue:[[parts objectAtIndex:2] doubleValue]
+                           alpha:[[parts objectAtIndex:3] doubleValue]];
+}
+
+
 - (void)setup:(CDVInvokedUrlCommand *)command {
     
+    // get parameters
+    NSString *jsTintColor = [command.arguments objectAtIndex:0];
+    NSString *jsTintSelectedColor = [command.arguments objectAtIndex:1];
+    
+    if (jsTintColor != nil) {
+        UIColor *tintColor = [self stringAsUIColor:jsTintColor];
+    }
+    
+    if (jsTintSelectedColor != nil) {
+        UIColor *tintSelectedColor = [self stringAsUIColor:jsTintColor];
+        [tabBar setTintColor:tintSelectedColor];
+    }
+    
+    
+    
+    
+    // setup tabbar
     tabBar = [UITabBar new];
     [tabBar sizeToFit];
     tabBar.delegate = self;

@@ -14,8 +14,11 @@
     
     UITabBar *tabBar;
     NSMutableArray *tabs;
+    NSMutableDictionary *tabCallbacks;
     
 }
+
+- (UIColor *)stringAsUIColor:(NSString*)str;
 
 - (void)setup:(CDVInvokedUrlCommand *)command;
 
