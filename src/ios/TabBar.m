@@ -50,6 +50,10 @@
     NSString *jsTintColor = [command.arguments objectAtIndex:0];
     NSString *jsTintSelectedColor = [command.arguments objectAtIndex:1];
     
+    // if already has a tabbar stop here
+    if (tabBar != nil) {
+        return;
+    }
     
     // setup tabbar
     tabBar = [UITabBar new];
@@ -122,17 +126,18 @@
         // get new tag nr
         int tag = tags++;
         
+        tagnr = [NSNumber numberWithInt:tag];
+        
         // link tag to tab id
-        [tabTags setObject:tid forKey:[NSNumber numberWithInt:tag]];
+        [tabTags setObject:tagnr forKey:tid];
         
         // add the tab
         [self addTab:tag withTitle:title andIcon:icon];
         
-        // store in hashtable
-        [tabCallbacks setObject:command.callbackId forKey:[NSNumber numberWithInt:tag]];
-
     }
     
+    // store in hashtable
+    [tabCallbacks setObject:command.callbackId forKey:tagnr];
 }
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
