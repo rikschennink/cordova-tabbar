@@ -18,7 +18,7 @@
     if (self)
 	{
         tabs = [[NSMutableArray alloc] initWithCapacity:4];
-        
+        tabCallbacks = [NSMutableDictionary new];
     }
     return self;
 }
@@ -32,12 +32,6 @@
     tabBar.userInteractionEnabled = YES;
 	tabBar.opaque = YES;
     
-    // [tabBar setTintColor:[UIColor colorWithRed:0.090196078 green:0.623529412 blue:0.831372549 alpha:1.0]];
-    // [tabBar setSelectedImageTintColor:[UIColor colorWithRed:0.678431373 green:0.22745098 blue:0.450980392 alpha:1.0]];
-    
-    [tabBar setTintColor:[UIColor colorWithRed:0.678431373 green:0.22745098 blue:0.450980392 alpha:1.0]];
-    
-
     // setup bounds for tabbar
     float height = 49.0f;
     CGRect webViewBounds = self.webView.bounds;
@@ -61,7 +55,6 @@
     NSString *filePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"www/%@@2x",icon] ofType:@"png"];
     UIImage *img = [UIImage imageWithContentsOfFile:filePath];
     
-    
     UITabBarItem *tabItem = [UITabBarItem new];
     [tabItem setTag:tag];
     [tabItem setTitle:title];
@@ -79,14 +72,22 @@
     NSString *title = [command.arguments objectAtIndex:1];
     NSString *icon = [command.arguments objectAtIndex:2];
     
+    // add the tab
     [self addTab:tag withTitle:title andIcon:icon];
+    
+    // store in hashtable
+    [tabCallbacks setObject:command.callbackId forKey:[NSNumber numberWithInt:tag]];
     
 }
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
     
-    NSLog(@"tab selected: %i %@", item.tag, item.title);
+    // get callback from hashtable
+    NSString *callbackId = [tabCallbacks objectForKey:[NSNumber numberWithInt:item.tag]];
+    
+    // return to js
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:callbackId];
     
 }
 

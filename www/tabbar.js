@@ -7,17 +7,38 @@
     var uid = 0;
     var tabTags = [];
 
+    var getColorAsFloat = function(color){
+        return color / 255;
+    };
+
+    var getColorStringFromObject = function(color) {
+        if (!color) {
+            return null;
+        }
+        return getColorAsFloat(color.r) + ',' + getColorAsFloat(color.g) + ',' + getColorAsFloat(color.b) + ',' + color.a;
+    };
+
     var plugin = {
         name:'TabBar',
         api:{
-            'setup':null,
-            'addTab':function(id,title,icon,onclick) {
+            'setup':function(options){
+
+                if (!options){options = {};}
+
+                var tintDefault = getColorStringFromObject(options.tintDefault);
+                var tintSelected = getColorStringFromObject(options.tintSelected);
+
+                return {
+                    params:[tintDefault,tintSelected]
+                }
+            },
+            'addTab':function(id,title,icon,ontap) {
 
                 tabTags[id] = uid++;
-                
+
                 return {
                     params:[tabTags[id],title,icon],
-                    success:onclick || null,
+                    success:ontap || null,
                     failure:null
                 };
             }
