@@ -32,6 +32,16 @@
                            alpha:[[parts objectAtIndex:3] doubleValue]];
 }
 
+- (void)reset:(CDVInvokedUrlCommand *)command {
+    
+    // remove all tab items
+    [tabs removeAllObjects];
+    
+    // remove tabbar
+    [tabBar removeFromSuperview];
+    
+}
+
 - (void)setup:(CDVInvokedUrlCommand *)command {
     
     // get parameters

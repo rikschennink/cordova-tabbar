@@ -18,7 +18,9 @@
     var plugin = {
         name:'TabBar',
         api:{
-            'reset':null,
+            'reset':function(){
+                return null;
+            },
             'setup':function(options) {
 
                 if (!options){options = {};}
@@ -53,7 +55,7 @@
 
             return function() {
 
-                var config = setup ? setup.apply(this,arguments) : {};
+                var config = setup ? setup.apply(this,arguments) || {} : {};
 
                 cordova.exec(
                     config.success || null,

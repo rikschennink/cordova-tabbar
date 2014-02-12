@@ -20,6 +20,8 @@
 
 - (UIColor *)stringAsUIColor:(NSString*)str;
 
+- (void)reset:(CDVInvokedUrlCommand *)command;
+
 - (void)setup:(CDVInvokedUrlCommand *)command;
 
 - (void)addTab:(uint)tag withTitle:(NSString *)title andIcon:(NSString*)icon;
