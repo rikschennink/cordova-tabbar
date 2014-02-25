@@ -70,12 +70,11 @@
         UIColor *tintColor = [self stringAsUIColor:jsTintColor];
     }
     */
-    
-    if (jsTintSelectedColor != (id)[NSNull null]) {
+    NSArray *vComp = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
+    if ([[vComp objectAtIndex:0] intValue] >= 7 && jsTintSelectedColor != (id)[NSNull null]) {
         UIColor *tintSelectedColor = [self stringAsUIColor:jsTintSelectedColor];
         [tabBar setTintColor:tintSelectedColor];
     }
-    
     
     // setup bounds for tabbar
     float height = 49.0f;
