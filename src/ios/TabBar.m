@@ -2,9 +2,6 @@
 //  TabBar.m
 //  TabBar
 //
-//  Created by Rik Schennink on 11/02/14.
-//
-//
 
 #import "TabBar.h"
 #import <Cordova/CDV.h>
@@ -12,17 +9,11 @@
 @implementation TabBar
 
 
-- (CDVPlugin*)initWithWebView:(UIWebView*)theWebView
-{
-    self = (TabBar*)[super initWithWebView:theWebView];
-    if (self)
-	{
-        tags = 0;
-        tabs = [[NSMutableArray alloc] initWithCapacity:4];
-        tabCallbacks = [NSMutableDictionary new];
-        tabTags = [NSMutableDictionary new];
-    }
-    return self;
+- (void)pluginInitialize {
+    tags = 0;
+    tabs = [[NSMutableArray alloc] initWithCapacity:4];
+    tabCallbacks = [NSMutableDictionary new];
+    tabTags = [NSMutableDictionary new];
 }
 
 
